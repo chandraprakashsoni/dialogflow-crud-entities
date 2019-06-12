@@ -1,5 +1,6 @@
 'use strict';
 
+//Requiring dialogflow dependency
 const dialogflow = require('dialogflow');
 
 // Read in credentials from file. To get it, follow instructions here, but
@@ -7,13 +8,16 @@ const dialogflow = require('dialogflow');
 // https://dialogflow.com/docs/reference/v2-auth-setup
 const credentials = require('./credentials.json');
 
+// Creating entities Client using credentials
 const entitiesClient = new dialogflow.EntityTypesClient({
   credentials: credentials,
 });
 
+// Using the Agent in Project
 const projectId = '<projectIDHere>';
 const agentPath = entitiesClient.projectAgentPath(projectId);
 
+// New entity with name - 'city' and entities as follows
 const cityEntityType = {
   displayName: 'city',
   kind: 'KIND_MAP',
@@ -23,6 +27,7 @@ const cityEntityType = {
   ],
 };
 
+// Calling createEntityType and passing in cityRequest to create our EntityType for city
 const cityRequest = {
   parent: agentPath,
   entityType: cityEntityType,
